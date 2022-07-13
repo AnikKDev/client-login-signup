@@ -2,26 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import { toast } from 'react-hot-toast';
 // import LoadingSpinner from '../../SharedPages/LoadingSpinner';
 
 const Login = () => {
-    const location = useLocation();
     const navigate = useNavigate();
-    let from = location.state?.from?.pathname || "/";
-    // sign in with email
-
     const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
 
-    // const email = watch('email');
     // form submission
     const onSubmit = ({ email, password }) => {
         const user = {
             email: email,
             password: password
         };
-        fetch('http://localhost:5000/users/login', {
+        fetch('https://secure-wave-45080.herokuapp.com/users/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,12 +30,8 @@ const Login = () => {
                     navigate('/home')
                 }
             })
+        reset()
     };
-    // password reset mail
-
-
-
-
 
     return (
         <div className=" flex justify-center lg:min-h-screen items-center">
@@ -75,8 +66,8 @@ const Login = () => {
 
                 </form>
 
-                <label className="mt-2">
-                    Don't have an account?<Link to="/signup" className="btn btn-link px-0">Sign Up</Link>
+                <label className="my-4">
+                    Don't have an account?<Link to="/signup" className="text-neutral underline px-2">Sign Up</Link>
                 </label>
             </div>
         </div>

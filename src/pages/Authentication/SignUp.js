@@ -14,7 +14,7 @@ const SignUp = () => {
             email: data.email,
             password: data.password
         };
-        fetch('http://localhost:5000/users', {
+        fetch('https://secure-wave-45080.herokuapp.com/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -23,15 +23,12 @@ const SignUp = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                if (data.acknowledged) {
+                    navigate('/home')
+                }
             })
+        reset()
     };
-
-    // sign in with google
-
-
-
-
     return (
         <div className=" flex justify-center lg:h-screen items-center">
             <div className="card w-full md:w-96 items-center shadow-2xl bg-base-100">
@@ -73,8 +70,8 @@ const SignUp = () => {
                 </form>
 
 
-                <label className="mt-2">
-                    Already have an account? <Link to="/login" className="btn btn-link px-0">Login</Link>
+                <label className="my-4">
+                    Already have an account? <Link to="/login" className="text-neutral underline px-2">Login</Link>
                 </label>
             </div>
         </div>
