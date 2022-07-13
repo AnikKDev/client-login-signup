@@ -9,7 +9,22 @@ const SignUp = () => {
     const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
 
     const onSubmit = data => {
-        console.log(data)
+        const user = {
+            name: data.name,
+            email: data.email,
+            password: data.password
+        };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
     };
 
     // sign in with google

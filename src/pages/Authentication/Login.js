@@ -17,7 +17,24 @@ const Login = () => {
     // const email = watch('email');
     // form submission
     const onSubmit = ({ email, password }) => {
-        console.log(email, password)
+        const user = {
+            email: email,
+            password: password
+        };
+        fetch('http://localhost:5000/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data) {
+                    navigate('/home')
+                }
+            })
     };
     // password reset mail
 
